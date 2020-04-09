@@ -4,21 +4,12 @@ from aiohttp import ClientSession
 import datetime
 from json import load
 
-"""
-def get_prefix(client, message):
-    with open("prefixes.json", "r") as f:
-        prefixes = json.load(f)
-
-    return prefixes[str(message.guild.id)]
-"""
-
 #Variables
-#token = "NjI1MDUyMzI1NDA4NDA3NTU0.Xotx6Q.31yVG5TQCSVTzCFub7MJPQby4aA"
 with open("token.json") as file:
     data = load(file)
 token = data["token"]
 
-bot = commands.Bot(command_prefix="?", status=discord.Status.do_not_disturb)
+bot = commands.Bot(command_prefix="h!")
 
 #Hastebin
 async def post(content, url='https://hastebin.com'):
@@ -30,6 +21,7 @@ async def post(content, url='https://hastebin.com'):
 @bot.event
 async def on_ready():
     print('Logged in as {0.user}'.format(bot))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="h!haste {insert text}"))
 
 @bot.event
 async def on_guild_join(guild):
@@ -38,15 +30,11 @@ async def on_guild_join(guild):
 @bot.event
 async def on_guild_remove(guild):
     print("Removed from guild: ", guild)
+    
 
 #Commands
 @bot.command()
-async def presence(ctx):
-    content_presence = ctx.message.content[10:]
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=content_presence))
-
-@bot.command()
-async def hasteit(ctx):
+async def haste(ctx):
     time = datetime.datetime.now()
     embed = discord.Embed(title="Hastebin link", color=discord.Color.blue(), url=await post(content = ctx.message.content[8:], url='https://hastebin.com'))
     
