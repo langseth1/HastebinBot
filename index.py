@@ -38,10 +38,14 @@ async def haste(ctx):
     time = datetime.datetime.now()
     embed = discord.Embed(title="Hastebin link", color=discord.Color.blue(), url=await post(content = ctx.message.content[8:], url='https://hastebin.com'))
     
-    embed.set_author(name="Hastebin", icon_url="https://www.saashub.com/images/app/service_logos/10/2e5b036c770f/large.png?1528818030")
+    embed.set_author(name="HastebinBot", icon_url="https://www.saashub.com/images/app/service_logos/10/2e5b036c770f/large.png?1528818030")
     embed.set_footer(text=f"Requested by: {ctx.author.name} on: {time} ", icon_url=ctx.author.avatar_url)
 
+    message = ctx.message
+
     await ctx.send(embed=embed)
+    await message.delete()
+    
     
 
 
