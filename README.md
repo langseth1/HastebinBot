@@ -3,8 +3,8 @@
 
  # Requirements
  
- pip install discord
- pip install aiohttp
+ #pip install discord
+ #pip install aiohttp
  
  
 
